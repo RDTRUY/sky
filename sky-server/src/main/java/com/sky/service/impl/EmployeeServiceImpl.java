@@ -117,7 +117,49 @@ public class EmployeeServiceImpl implements EmployeeService {
         return new PageResult(total,recodes);
     }
 
+    /**
+     * 员工账号启用/禁用
+     * @param status
+     * @param id
+     */
+    @Override
+    public void status(Integer status, Long id) {
+
+        //写一个总的update,而不是只针对修改状态
+
+        /*传统写法
+        Employee employee = new Employee();
+        employee.setStatus(status);
+        employee.setId(id);*/
+
+        //现在讲究的就是链式编程，流式编程
+        Employee employee = Employee.builder()
+                .status(status)
+                .id(id)
+                .build();
+
+
+        employeeMapper.update(employee);
+
+    }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
