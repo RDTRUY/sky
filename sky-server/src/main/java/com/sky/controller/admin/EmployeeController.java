@@ -114,6 +114,33 @@ public class EmployeeController {
         return Result.success();
     }
 
+    /**
+     * 根据id查询员工信息
+     * @param id
+     * @return
+     */
+    @GetMapping("/{id}")
+    @ApiOperation("根据id查询员工信息")
+    public Result<Employee> getById(@PathVariable Long id){
+        log.info("根据id查询员工信息:{}",id);
+        Employee employee=employeeService.getById(id);
+        return Result.success(employee);
+    }
+
+//    前端传过来的JSON用DTO接受，后端返回前端的数据是VO
+//    DTO代表服务层需要接收的数据和返回的数据，而VO代表展示层需要显示的数据
+
+    /**
+     * 编辑员工信息
+     * @return
+     */
+    @PutMapping
+    @ApiOperation("编辑员工信息")
+    public Result update(@RequestBody EmployeeDTO employeeDTO){
+        log.info("编辑员工信息:{}",employeeDTO);
+        employeeService.update(employeeDTO);
+        return Result.success();
+    }
 }
 
 
